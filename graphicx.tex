@@ -1,0 +1,76 @@
+\section{\textit{graphicx} package}
+
+\begin{quote}
+    2020-05-01: first update
+\end{quote}
+
+%\subsection{Package settings}
+
+\subsection{Examples}
+
+\subsection{Specical case}
+
+1. Splitting subfigure across multiple pages
+
+\begin{lstlisting}[language=Tex]
+\begin{figure}[b]
+    \begin{subfigure}[t]{0.45\hsize}
+        \includegraphics[width=0.95\linewidth]{example-image}
+        \caption{}
+    \end{subfigure}   
+    \begin{subfigure}[t]{0.45\hsize}
+        \includegraphics[width=0.95\linewidth]{example-image}
+        \caption{}
+    \end{subfigure}
+    \caption{first part of my figure}
+\end{figure}
+\clearpage   
+\begin{figure}[tb]\ContinuedFloat
+    \begin{subfigure}[t]{0.45\hsize}
+        \includegraphics[width=0.95\linewidth]{example-image}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\hsize}
+        \includegraphics[width=0.95\linewidth]{example-image}
+        \caption{}
+    \end{subfigure}
+    \caption{second part of my figure}
+\end{figure}
+\end{lstlisting}
+
+\begin{figure}[b]
+    \begin{subfigure}[t]{0.45\hsize}
+        \includegraphics[width=0.95\linewidth]{example-image}
+        \caption{}
+    \end{subfigure}   
+    \begin{subfigure}[t]{0.45\hsize}
+        \includegraphics[width=0.95\linewidth]{example-image}
+        \caption{}
+    \end{subfigure}
+    \caption{first part of my figure}
+\end{figure}
+\clearpage   
+\begin{figure}[tb]\ContinuedFloat
+    \begin{subfigure}[t]{0.45\hsize}
+        \includegraphics[width=0.95\linewidth]{example-image}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\hsize}
+        \includegraphics[width=0.95\linewidth]{example-image}
+        \caption{}
+    \end{subfigure}
+    \caption{second part of my figure}
+\end{figure}
+
+\subsection{Useful links}
+
+\begin{enumerate}
+
+    \item \href{https://texdoc.org/serve/graphicx.pdf/0}{The graphicx package mamual}
+
+    Version: 2020/09/09
+    \item \href{https://tex.stackexchange.com/questions/298738/splitting-subfigure-across-multiple-pages}{Splitting Subfigure across multiple pages - stackexchange}
+    
+    
+\end{enumerate}
+

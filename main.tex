@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+% adding reference
+\usepackage{url}
+\usepackage{hyperref}
+% using tikz to draw
+\usepackage{tikz}
+% put code
+\usepackage{listings}
+% adding color for code, url, and so on
+\usepackage{color}
+% for adding sub-files
+\usepackage{subfiles}
+% for figures
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% https://tex.stackexchange.com/questions/116534/lstlisting-line-wrapping/116572
+% adding line break
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+
+\title{\TeX~Summary \& Best Practice}
+\author{Yujie HE}
+\date{April 2021}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\clearpage
+
+\subfile{listings}
+
+\subfile{tikz}
+
+\subfile{graphicx}
+\clearpage
+\subfile{misc}
+\clearpage
+\subfile{todo}
+
+
+\end{document}
