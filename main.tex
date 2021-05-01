@@ -1,10 +1,14 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+% page setting to control document margins
+\usepackage[letterpaper, left=0.9in,top=0.9in,right=0.9in,bottom=0.9in]{geometry}
 % adding reference
 \usepackage{url}
 \usepackage{hyperref}
 % using tikz to draw
-\usepackage{tikz}
+\usepackage{pgf,tikz}
+% tikzstyle for flowchart
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
 % put code
 \usepackage{listings}
 % adding color for code, url, and so on
@@ -15,6 +19,13 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
+% for highlighting
+\usepackage{soul}
+\soulregister\cite7 % 针对\cite命令
+\soulregister\citep7 % 针对\citep命令
+\soulregister\citet7 % 针对\citet命令
+\soulregister\ref7 % 针对\ref命令
+\soulregister\pageref7 % 针对\pageref命令
 
 % https://tex.stackexchange.com/questions/116534/lstlisting-line-wrapping/116572
 % adding line break
