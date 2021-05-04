@@ -170,9 +170,12 @@ Theis command could be used to define the basic components of a flowchart, which
 \label{subsub:flowchart}
 
 \begin{enumerate}
-    \item define block style
+    \item include TikZ library \& define block style
     
 \begin{lstlisting}[language=Tex]
+\usepackage{pgf,tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
 \tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
 \tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
@@ -182,9 +185,59 @@ Theis command could be used to define the basic components of a flowchart, which
 
 \item add nodes
 
-\begin{tikzpicture}[node distance=2cm]
-\node (start) [startstop] {Start};
+\begin{lstlisting}[language=Tex]
+\begin{tikzpicture}[node distance=2.5cm]
+    \node (start) [startstop] {Takeoff};
+    \node (pro1) [process, right of=start, xshift=1.8cm] {FlyToDestGPS};
+    \node (pro2) [process, right of=pro1, xshift=1.8cm] {OffboardMode};
+    \node (pro3) [process, right of=pro2, xshift=1.8cm] {SearchTag};
+    \node (dec1) [decision, below of=pro3] {Tag found?};
+    \node (pro4) [process, left of=dec1, xshift=-1.8cm] {MinAltiErr};
+    \node (pro5) [process, left of=pro4, xshift=-1.8cm] {CenterTag};
+    \node (pro6) [process, left of=pro5, xshift=-1.8cm] {RotateToTag};
+    \node (pro7) [process, below of=pro6] {ApproachTag};
+    \node (end) [startstop, right of=pro7, xshift=1.8cm] {Land \& Disarm};
+    
+    \draw [arrow] (start) -- (pro1);
+    \draw [arrow] (pro1) -- (pro2);
+    \draw [arrow] (pro2) -- (pro3);
+    \draw [arrow] (pro3) -- (dec1);
+    \draw [arrow] (dec1) -- (pro3);
+    \draw [arrow] (dec1) -- (pro4);
+    \draw [arrow] (pro4) -- (pro5);
+    \draw [arrow] (pro5) -- (pro6);
+    \draw [arrow] (pro6) -- (pro7);
+    \draw [arrow] (pro7) -- (end);
 \end{tikzpicture}
+
+\end{lstlisting}
+
+\begin{figure}[htbp]
+    \begin{tikzpicture}[node distance=2.5cm]
+        \node (start) [startstop] {Takeoff};
+        \node (pro1) [process, right of=start, xshift=1.8cm] {FlyToDestGPS};
+        \node (pro2) [process, right of=pro1, xshift=1.8cm] {OffboardMode};
+        \node (pro3) [process, right of=pro2, xshift=1.8cm] {SearchTag};
+        \node (dec1) [decision, below of=pro3] {Tag found?};
+        \node (pro4) [process, left of=dec1, xshift=-1.8cm] {MinAltiErr};
+        \node (pro5) [process, left of=pro4, xshift=-1.8cm] {CenterTag};
+        \node (pro6) [process, left of=pro5, xshift=-1.8cm] {RotateToTag};
+        \node (pro7) [process, below of=pro6] {ApproachTag};
+        \node (end) [startstop, right of=pro7, xshift=1.8cm] {Land \& Disarm};
+        
+        \draw [arrow] (start) -- (pro1);
+        \draw [arrow] (pro1) -- (pro2);
+        \draw [arrow] (pro2) -- (pro3);
+        \draw [arrow] (pro3) -- (dec1);
+        \draw [arrow] (dec1) -- (pro3);
+        \draw [arrow] (dec1) -- (pro4);
+        \draw [arrow] (pro4) -- (pro5);
+        \draw [arrow] (pro5) -- (pro6);
+        \draw [arrow] (pro6) -- (pro7);
+        \draw [arrow] (pro7) -- (end);
+    \end{tikzpicture}
+    \caption{Flowchart of drone delivery using Ti\textit{k}Z}
+\end{figure}
 
 \item connect with arrows
 
@@ -194,7 +247,54 @@ Theis command could be used to define the basic components of a flowchart, which
 
 \subsubsection{Creating TikZ from GeoGebra}
 
-\hl{to be updated}
+\begin{enumerate}
+\item radius of communication/neighborhood from Reynolds flocking algorithm 
+
+\begin{lstlisting}[language=Tex]
+\begin{tikzpicture}
+    % circle and radius
+    \draw[dashed] (0,0) circle (1cm);
+    \draw[dashed] (0,0) -- (0.8,-0.6);
+    % center point
+    \filldraw[blue, draw=black] (0,0) circle (0.1cm) node[anchor=north west] {agent $i$};
+    % points within the neighbor
+    \filldraw[blue!40!white, draw=black] (0.5,0.7) circle (0.1cm);
+    \filldraw[blue!40!white, draw=black] (0.7,0.2) circle (0.1cm);
+    \filldraw[blue!40!white, draw=black] (-0.3,0.5) circle (0.1cm);
+    \filldraw[blue!40!white, draw=black] (-0.4,-0.5) circle (0.1cm) circle (0.1cm) node[anchor=east] {agent $j \in N_i$};
+    \filldraw[blue!40!white, draw=black] (0.4,-0.8);
+    % points outside the radius neighbor
+    \fill[black!20!white] (0.7,-0.8) circle (0.11cm);
+    \fill[black!20!white] (1.3,0.0) circle (0.11cm);
+    \fill[black!20!white] (1.2,-0.7) circle (0.11cm);
+    \fill[black!20!white] (1.5,-0.5) circle (0.11cm);
+    \fill[black!20!white] (1.4,0.4) circle (0.11cm);
+\end{tikzpicture}
+\end{lstlisting}
+
+\begin{tikzpicture}
+    % circle and radius
+    \draw[dashed] (0,0) circle (1cm);
+    \draw[dashed] (0,0) -- (0.8,-0.6);
+    % center point
+    \filldraw[blue, draw=black] (0,0) circle (0.1cm) node[anchor=north west] {agent $i$};
+    % points within the neighbor
+    \filldraw[blue!40!white, draw=black] (0.5,0.7) circle (0.1cm);
+    \filldraw[blue!40!white, draw=black] (0.7,0.2) circle (0.1cm);
+    \filldraw[blue!40!white, draw=black] (-0.3,0.5) circle (0.1cm);
+    \filldraw[blue!40!white, draw=black] (-0.4,-0.5) circle (0.1cm) circle (0.1cm) node[anchor=east] {agent $j \in N_i$};
+    \filldraw[blue!40!white, draw=black] (0.4,-0.8);
+    % points outside the radius neighbor
+    \fill[black!20!white] (0.7,-0.8) circle (0.11cm);
+    \fill[black!20!white] (1.3,0.0) circle (0.11cm);
+    \fill[black!20!white] (1.2,-0.7) circle (0.11cm);
+    \fill[black!20!white] (1.5,-0.5) circle (0.11cm);
+    \fill[black!20!white] (1.4,0.4) circle (0.11cm);
+\end{tikzpicture}
+
+\item \hl{to be updated}
+
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -213,5 +313,7 @@ Theis command could be used to define the basic components of a flowchart, which
     \href{https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ:_A_Tutorial_for_Beginners_(Part_3)%E2%80%94Creating_Flowcharts}{Part 3-Creating Flowcharts}
     
     \item \href{https://tex.stackexchange.com/questions/42611/list-of-available-tikz-libraries-with-a-short-introduction}{List of available TikZ libraries with a short introduction - stackexchange}
+    
+    \item \href{https://web.mit.edu/custer/Desktop/custer/MacData/afs/sipb/project/latex/tutorial_latex_tikz.pdf}{TikZ Tutorial by Nick Horelik from MIT}
     
 \end{enumerate}

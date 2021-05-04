@@ -7,8 +7,13 @@
 \usepackage{hyperref}
 % using tikz to draw
 \usepackage{pgf,tikz}
+% tikz library
+\usetikzlibrary{shapes.geometric, arrows}
 % tikzstyle for flowchart
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
 % put code
 \usepackage{listings}
 % adding color for code, url, and so on
@@ -43,9 +48,10 @@
 	urlcolor=cyan,
 }
 
+% reshape the title
 \title{\TeX~Summary \& Best Practice}
-\author{Yujie HE}
-\date{April 2021}
+\author{Yujie HE (\texttt{yujie.he@epfl.ch})}
+\date{May 4, 2021}
 
 \begin{document}
 
@@ -53,11 +59,10 @@
 
 \tableofcontents
 \clearpage
-
 \subfile{listings}
-
+\clearpage
 \subfile{tikz}
-
+\clearpage
 \subfile{graphicx}
 \clearpage
 \subfile{misc}
